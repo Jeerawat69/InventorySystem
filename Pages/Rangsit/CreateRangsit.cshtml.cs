@@ -28,7 +28,7 @@ namespace InventoryStstem.Pages.Rangsit
 
             try
             {
-                String connectionString = "Server=tcp:1650700865.database.windows.net,1433;Initial Catalog=CS436;Persist Security Info=False;User ID=Admin1;Password=0922727229OvenKung;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                String connectionString = "Server=tcp:1650703695.database.windows.net,1433;Initial Catalog=Inventory;Persist Security Info=False;User ID=OAK;Password=0800651937Jrw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();

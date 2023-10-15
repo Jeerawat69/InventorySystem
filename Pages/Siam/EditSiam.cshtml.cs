@@ -15,7 +15,7 @@ namespace InventoryStstem.Pages.Siam
             try
             {
 
-                String connectionString = "Server=tcp:1650700865.database.windows.net,1433;Initial Catalog=CS436;Persist Security Info=False;User ID=Admin1;Password=0922727229OvenKung;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                String connectionString = "Server=tcp:1650703695.database.windows.net,1433;Initial Catalog=Inventory;Persist Security Info=False;User ID=OAK;Password=0800651937Jrw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -44,6 +44,7 @@ namespace InventoryStstem.Pages.Siam
         }
         public void OnPost()
         {
+            stockInfo.itemid = Request.Form["itemid"];
             stockInfo.item = Request.Form["item"];
             stockInfo.storeid = Request.Form["storeid"];
             stockInfo.supplier = Request.Form["supplier"];
@@ -59,15 +60,14 @@ namespace InventoryStstem.Pages.Siam
             try
             {
 
-                String connectionString = "Server=tcp:inventory1510.database.windows.net,1433;Initial Catalog=Inventory;Persist Security Info=False;User ID=Tomorrow;Password=Snowy_1510;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                String connectionString = "Server=tcp:1650703695.database.windows.net,1433;Initial Catalog=Inventory;Persist Security Info=False;User ID=OAK;Password=0800651937Jrw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "UPDATE stock" +
-                                 "SET item=@item, storeid=@storeid, supplier=@supplier, amount=@amount" +
-                                 "WHERE itemid=@itemid;";
+                    String sql = "UPDATE stocks SET item=@item, storeid=@storeid, supplier=@supplier, amount=@amount WHERE itemid=@itemid;";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
+                        command.Parameters.AddWithValue("itemid", stockInfo.itemid);
                         command.Parameters.AddWithValue("@item", stockInfo.item);
                         command.Parameters.AddWithValue("@storeid", stockInfo.storeid);
                         command.Parameters.AddWithValue("@supplier", stockInfo.supplier);
@@ -80,6 +80,7 @@ namespace InventoryStstem.Pages.Siam
             catch (Exception ex)
             {
                 errorMessage = ex.Message;
+                return;
             }
             Response.Redirect("/Siam/IndexSiam");
         }
